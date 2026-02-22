@@ -3,45 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mansion Connect</title>
     <style>
-        .card {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            height: 100vh;
         }
-        .buttons {
+        .button-container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             width: 100%;
+            align-items: center;
+            gap: 10px;
         }
         .button {
-            flex: 1;
-            margin: 5px;
-            padding: 10px;
-            background-color: #007BFF;
+            width: 100%;
+            max-width: 300px;
+            padding: 15px;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
-            text-decoration: none;
+            font-size: 16px;
+        }
+        @media (max-width: 600px) {
+            .button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Welcome to Maison Connect</h1>
-        <div class="buttons">
-            <a href="#" class="button">Button 1</a>
-            <a href="#" class="button">Button 2</a>
-            <a href="#" class="button">Button 3</a>
-        </div>
+    <div class="button-container">
+        <a href="/path/to/your/pdf" class="button">Download PDF</a>
+        <a href="/contact" class="button">Contact Us</a>
     </div>
 </body>
 </html>
