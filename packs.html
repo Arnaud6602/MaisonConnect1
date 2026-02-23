@@ -1,1 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaisonConnect – Nos Packs</title>
+<style>
+body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:#f4f6f8; color:#222; }
+header { background:#0f172a; color:#fff; padding:40px 20px; text-align:center; }
+header h1 { margin:0; font-size:2.3em; }
+header nav a { color:#fff; text-decoration:none; margin:0 15px; font-weight:600; }
+header nav a:hover { text-decoration:underline; }
+.container { max-width:900px; margin:auto; padding:40px 20px; }
+.card { background:#fff; border-radius:12px; padding:30px; box-shadow:0 8px 25px rgba(0,0,0,0.05); margin-bottom:30px; }
+h2 { margin-top:0; color:#0f172a; }
+ul { padding-left:20px; line-height:1.8; }
+.price { font-size:1.8em; font-weight:bold; color:#0f172a; margin-top:10px; text-align:center; }
+.notice { margin-top:10px; font-size:0.9em; color:#555; }
+button, .option-btn { margin:0 5px; padding:5px 12px; background:#0f172a; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+button:hover, .option-btn:hover { background:#020617; }
+input[type=checkbox] { margin-right:10px; }
+.footer { margin-top:40px; text-align:center; font-size:0.9em; color:#555; }
+.option { margin-top:10px; }
+</style>
+</head>
+<body>
 
+<header>
+<h1>🏠 MaisonConnect</h1>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="packs.html">Nos Packs</a>
+<a href="mailto:contact@maisonconnect.fr">Contact</a>
+</nav>
+</header>
+
+<div class="container">
+
+<!-- Pack S -->
+<div class="card">
+<h2>Pack S – Essentiel Confort</h2>
+<ul>
+<li>2 modules volets inclus</li>
+<li>1 module lumière inclus</li>
+<li>Programmation jour / nuit</li>
+<li>Simulation de présence simple</li>
+<li>Installation complète</li>
+</ul>
+<p>Options disponibles :</p>
+<div class="option">
+Volets supplémentaires (max 1) : 
+<button class="option-btn" onclick="decr('sVolet')">-</button>
+<span id="sVoletCount">0</span>
+<button class="option-btn" onclick="incr('sVolet',1)">+</button>
+</div>
+<div class="price" id="prixS">229 €</div>
+<button onclick="contacter()">📞 Nous contacter</button>
+</div>
+
+<!-- Pack M -->
+<div class="card">
+<h2>Pack M – Maison Connectée</h2>
+<ul>
+<li>4 modules volets inclus</li>
+<li>1 module lumière inclus</li>
+<li>Automatisations avancées</li>
+<li>Simulation de présence évoluée</li>
+<li>Installation complète</li>
+</ul>
+<p>Options disponibles :</p>
+<div class="option">
+Volets supplémentaires :
+<button class="option-btn" onclick="decr('mVolet1')">-</button>
+<span id="mVolet1Count">0</span>
+<button class="option-btn" onclick="incr('mVolet1',2)">+</button> (max 2)
+</div>
+<div class="option">
+Lumière supplémentaire :
+<button class="option-btn" onclick="decr('mLumiere')">-</button>
+<span id="mLumiereCount">0</span>
+<button class="option-btn" onclick="incr('mLumiere',1)">+</button> (max 1)
+</div>
+<div class="option">
+Tablette murale :
+<button class="option-btn" onclick="decr('mTablette')">-</button>
+<span id="mTabletteCount">0</span>
+<button class="option-btn" onclick="incr('mTablette',1)">+</button> (max 1)
+</div>
+<div class="price" id="prixM">399 €</div>
+<button onclick="contacter()">📞 Nous contacter</button>
+</div>
+
+<!-- Pack L -->
+<div class="card">
+<h2>Pack L – Maison Intelligente Premium</h2>
+<ul>
+<li>8 modules volets inclus</li>
+<li>2 modules lumière inclus</li>
+<li>Tablette murale incluse</li>
+<li>Automatisations avancées</li>
+<li>Simulation de présence réaliste</li>
+<li>Installation complète + paramétrage avancé</li>
+</ul>
+<p>Options disponibles :</p>
+<div class="option">
+Volets supplémentaires :
+<button class="option-btn" onclick="decr('lVolet1')">-</button>
+<span id="lVolet1Count">0</span>
+<button class="option-btn" onclick="incr('lVolet1',4)">+</button> (max 4)
+</div>
+<div class="option">
+Lumières supplémentaires :
+<button class="option-btn" onclick="decr('lLumiere')">-</button>
+<span id="lLumiereCount">0</span>
+<button class="option-btn" onclick="incr('lLumiere',2)">+</button> (max 2)
+</div>
+<div class="price" id="prixL">749 €</div>
+<button onclick="contacter()">📞 Nous contacter</button>
+</div>
+
+<div class="footer">
+MaisonConnect – Installation professionnelle • contact@maisonconnect.fr • 06 49 08 08 00
+</div>
+
+<script>
+// Contact
+function contacter(){
+    window.location.href="mailto:contact@maisonconnect.fr?subject=Demande d'information – MaisonConnect";
+}
+
+// Pack S
+let sVolet = 0;
+function incr(pack,max){ 
+  if(pack==='sVolet' && sVolet<max){ sVolet++; updateS(); } 
+  if(pack==='mVolet1' && mVolet1<max){ mVolet1++; updateM(); }
+  if(pack==='mLumiere' && mLumiere<max){ mLumiere++; updateM(); }
+  if(pack==='mTablette' && mTablette<max){ mTablette++; updateM(); }
+  if(pack==='lVolet1' && lVolet1<max){ lVolet1++; updateL(); }
+  if(pack==='lLumiere' && lLumiere<max){ lLumiere++; updateL(); }
+}
+function decr(pack){
+  if(pack==='sVolet' && sVolet>0){ sVolet--; updateS(); }
+  if(pack==='mVolet1' && mVolet1>0){ mVolet1--; updateM(); }
+  if(pack==='mLumiere' && mLumiere>0){ mLumiere--; updateM(); }
+  if(pack==='mTablette' && mTablette>0){ mTablette--; updateM(); }
+  if(pack==='lVolet1' && lVolet1>0){ lVolet1--; updateL(); }
+  if(pack==='lLumiere' && lLumiere>0){ lLumiere--; updateL(); }
+}
+
+// Pack S
+function updateS(){
+  let prix = 229 + sVolet*89;
+  document.getElementById('sVoletCount').innerText = sVolet;
+  document.getElementById('prixS').innerText = prix + ' €';
+}
+
+// Pack M
+let mVolet1=0, mLumiere=0, mTablette=0;
+function updateM(){
+  let prix = 399 + mVolet1*89 + mLumiere*60 + mTablette*149;
+  document.getElementById('mVolet1Count').innerText = mVolet1;
+  document.getElementById('mLumiereCount').innerText = mLumiere;
+  document.getElementById('mTabletteCount').innerText = mTablette;
+  document.getElementById('prixM').innerText = prix + ' €';
+}
+
+// Pack L
+let lVolet1=0, lLumiere=0;
+function updateL(){
+  let prix = 749 + lVolet1*89 + lLumiere*60;
+  document.getElementById('lVolet1Count').innerText = lVolet1;
+  document.getElementById('lLumiereCount').innerText = lLumiere;
+  document.getElementById('prixL').innerText = prix + ' €';
+}
+</script>
+
+</body>
+</html>
