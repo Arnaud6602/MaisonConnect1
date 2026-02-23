@@ -84,8 +84,14 @@ ul {
     line-height: 1.8;
 }
 
+.notice {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #555;
+}
+
 button {
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100%;
     padding: 16px;
     background: #0f172a;
@@ -140,7 +146,7 @@ button:hover {
 <div class="result">
 <h3>Votre prestation inclut :</h3>
 <ul>
-<li>Modules Wi-Fi professionnels</li>
+<li>Modules connectés compatibles Tuya</li>
 <li>Installation complète sur volets existants</li>
 <li>Configuration de l'application</li>
 <li>Automatisations jour / nuit</li>
@@ -148,9 +154,15 @@ button:hover {
 </ul>
 
 <div class="price" id="prix">89 €</div>
+
+<div class="notice">
+* Sous réserve de couverture Wi-Fi suffisante au domicile. Une vérification est effectuée lors de l'installation.
 </div>
 
-<button onclick="genererDevis()">📄 Générer mon devis</button>
+</div>
+
+<button onclick="genererDevis()">📄 Télécharger le devis</button>
+<button onclick="contacter()">📞 Nous contacter</button>
 
 <div class="footer">
 MaisonConnect – Installation professionnelle • contact@maisonconnect.fr • 06 49 08 08 00
@@ -182,11 +194,13 @@ Installation de ${v} volet(s) connecté(s)
 Prix total : ${prix} €
 
 Prestations incluses :
-- Fourniture des modules Wi-Fi
+- Fourniture modules connectés
 - Installation complète
 - Paramétrage de l'application
 - Automatisations jour / nuit
 - Tests et validation
+
+Sous réserve de couverture Wi-Fi suffisante.
 
 Contact :
 MaisonConnect
@@ -194,9 +208,15 @@ contact@maisonconnect.fr
 06 49 08 08 00
 `;
 
-    let blob = new Blob([texte], { type: "application/pdf" });
-    let url = URL.createObjectURL(blob);
-    window.open(url, "_blank");
+    let blob = new Blob([texte], { type: "text/plain;charset=utf-8;" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "devis-maisonconnect.txt";
+    link.click();
+}
+
+function contacter() {
+    window.location.href = "mailto:contact@maisonconnect.fr?subject=Demande d'information – MaisonConnect";
 }
 </script>
 
