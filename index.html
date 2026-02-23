@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaisonConnect – Domotique résidentielle</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background: #0f172a;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.3em;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: #cbd5e1;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+h2 {
+    margin-top: 0;
+    color: #0f172a;
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.price {
+    font-size: 2em;
+    font-weight: bold;
+    color: #0f172a;
+    margin-top: 10px;
+    text-align: center;
+}
+
+ul {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 16px;
+    background: #0f172a;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #020617;
+}
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏠 MaisonConnect</h1>
+<p>Domotique résidentielle – Installation clé en main</p>
+</header>
+
+<div class="container">
+<div class="card">
+
+<h2>Configurez votre installation</h2>
+
+<label>Nombre de volets à connecter :</label>
+<select id="volets" onchange="calcul()">
+<option value="1">1 volet</option>
+<option value="2">2 volets</option>
+<option value="3">3 volets</option>
+<option value="4">4 volets</option>
+<option value="5">5 volets</option>
+<option value="6">6 volets</option>
+<option value="7">7 volets</option>
+<option value="8">8 volets</option>
+<option value="9">9 volets</option>
+<option value="10">10 volets</option>
+<option value="11">11 volets</option>
+<option value="12">12 volets</option>
+</select>
+
+<div class="result">
+<h3>Votre prestation inclut :</h3>
+<ul>
+<li>Modules Wi-Fi professionnels</li>
+<li>Installation complète sur volets existants</li>
+<li>Configuration de l'application</li>
+<li>Automatisations jour / nuit</li>
+<li>Tests et validation finale</li>
+</ul>
+
+<div class="price" id="prix">89 €</div>
+</div>
+
+<button onclick="genererDevis()">📄 Générer mon devis</button>
+
+<div class="footer">
+MaisonConnect – Installation professionnelle • contact@maisonconnect.fr • 06 49 08 08 00
+</div>
+
+</div>
+</div>
+
+<script>
+const tarifs = {
+1:89,2:169,3:239,4:319,5:399,6:479,
+7:559,8:639,9:719,10:799,11:879,12:949
+};
+
+function calcul() {
+    let v = document.getElementById("volets").value;
+    document.getElementById("prix").innerHTML = tarifs[v] + " €";
+}
+
+function genererDevis() {
+    let v = document.getElementById("volets").value;
+    let prix = tarifs[v];
+
+    let texte = 
+`DEVIS MAISONCONNECT
+
+Installation de ${v} volet(s) connecté(s)
+
+Prix total : ${prix} €
+
+Prestations incluses :
+- Fourniture des modules Wi-Fi
+- Installation complète
+- Paramétrage de l'application
+- Automatisations jour / nuit
+- Tests et validation
+
+Contact :
+MaisonConnect
+contact@maisonconnect.fr
+06 49 08 08 00
+`;
+
+    let blob = new Blob([texte], { type: "application/pdf" });
+    let url = URL.createObjectURL(blob);
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
