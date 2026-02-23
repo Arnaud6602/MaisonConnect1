@@ -16,11 +16,11 @@ h2 { margin-top:0; color:#0f172a; }
 ul { padding-left:20px; line-height:1.8; }
 .price { font-size:1.8em; font-weight:bold; color:#0f172a; margin-top:10px; text-align:center; }
 .notice { margin-top:10px; font-size:0.9em; color:#555; }
-button, .option-btn { margin:0 5px; padding:5px 12px; background:#0f172a; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+button, .option-btn { margin:0 5px; padding:6px 14px; background:#0f172a; color:#fff; border:none; border-radius:8px; cursor:pointer; }
 button:hover, .option-btn:hover { background:#020617; }
-input[type=checkbox] { margin-right:10px; }
+.option-card { display:flex; align-items:center; gap:10px; margin:10px 0; flex-wrap:wrap; }
+.option-card span { font-weight:500; }
 .footer { margin-top:40px; text-align:center; font-size:0.9em; color:#555; }
-.option { margin-top:10px; }
 </style>
 </head>
 <body>
@@ -47,13 +47,14 @@ input[type=checkbox] { margin-right:10px; }
 <li>Installation complète</li>
 </ul>
 <p>Options disponibles :</p>
-<div class="option">
-Volets supplémentaires (max 1) : 
+<div class="option-card">
+<span>Volets supplémentaires (max 1) :</span>
 <button class="option-btn" onclick="decr('sVolet')">-</button>
 <span id="sVoletCount">0</span>
 <button class="option-btn" onclick="incr('sVolet',1)">+</button>
 </div>
 <div class="price" id="prixS">229 €</div>
+<div class="notice">* Sous réserve de couverture Wi-Fi suffisante.</div>
 <button onclick="contacter()">📞 Nous contacter</button>
 </div>
 
@@ -68,25 +69,26 @@ Volets supplémentaires (max 1) :
 <li>Installation complète</li>
 </ul>
 <p>Options disponibles :</p>
-<div class="option">
-Volets supplémentaires :
+<div class="option-card">
+<span>Volets supplémentaires (max 2) :</span>
 <button class="option-btn" onclick="decr('mVolet1')">-</button>
 <span id="mVolet1Count">0</span>
-<button class="option-btn" onclick="incr('mVolet1',2)">+</button> (max 2)
+<button class="option-btn" onclick="incr('mVolet1',2)">+</button>
 </div>
-<div class="option">
-Lumière supplémentaire :
+<div class="option-card">
+<span>Lumière supplémentaire (max 1) :</span>
 <button class="option-btn" onclick="decr('mLumiere')">-</button>
 <span id="mLumiereCount">0</span>
-<button class="option-btn" onclick="incr('mLumiere',1)">+</button> (max 1)
+<button class="option-btn" onclick="incr('mLumiere',1)">+</button>
 </div>
-<div class="option">
-Tablette murale :
+<div class="option-card">
+<span>Tablette murale (max 1) :</span>
 <button class="option-btn" onclick="decr('mTablette')">-</button>
 <span id="mTabletteCount">0</span>
-<button class="option-btn" onclick="incr('mTablette',1)">+</button> (max 1)
+<button class="option-btn" onclick="incr('mTablette',1)">+</button>
 </div>
 <div class="price" id="prixM">399 €</div>
+<div class="notice">* Sous réserve de couverture Wi-Fi suffisante.</div>
 <button onclick="contacter()">📞 Nous contacter</button>
 </div>
 
@@ -102,19 +104,20 @@ Tablette murale :
 <li>Installation complète + paramétrage avancé</li>
 </ul>
 <p>Options disponibles :</p>
-<div class="option">
-Volets supplémentaires :
+<div class="option-card">
+<span>Volets supplémentaires (max 4) :</span>
 <button class="option-btn" onclick="decr('lVolet1')">-</button>
 <span id="lVolet1Count">0</span>
-<button class="option-btn" onclick="incr('lVolet1',4)">+</button> (max 4)
+<button class="option-btn" onclick="incr('lVolet1',4)">+</button>
 </div>
-<div class="option">
-Lumières supplémentaires :
+<div class="option-card">
+<span>Lumières supplémentaires (max 2) :</span>
 <button class="option-btn" onclick="decr('lLumiere')">-</button>
 <span id="lLumiereCount">0</span>
-<button class="option-btn" onclick="incr('lLumiere',2)">+</button> (max 2)
+<button class="option-btn" onclick="incr('lLumiere',2)">+</button>
 </div>
 <div class="price" id="prixL">749 €</div>
+<div class="notice">* Sous réserve de couverture Wi-Fi suffisante.</div>
 <button onclick="contacter()">📞 Nous contacter</button>
 </div>
 
@@ -130,14 +133,22 @@ function contacter(){
 
 // Pack S
 let sVolet = 0;
-function incr(pack,max){ 
-  if(pack==='sVolet' && sVolet<max){ sVolet++; updateS(); } 
+
+// Pack M
+let mVolet1=0, mLumiere=0, mTablette=0;
+
+// Pack L
+let lVolet1=0, lLumiere=0;
+
+function incr(pack,max){
+  if(pack==='sVolet' && sVolet<max){ sVolet++; updateS(); }
   if(pack==='mVolet1' && mVolet1<max){ mVolet1++; updateM(); }
   if(pack==='mLumiere' && mLumiere<max){ mLumiere++; updateM(); }
   if(pack==='mTablette' && mTablette<max){ mTablette++; updateM(); }
   if(pack==='lVolet1' && lVolet1<max){ lVolet1++; updateL(); }
   if(pack==='lLumiere' && lLumiere<max){ lLumiere++; updateL(); }
 }
+
 function decr(pack){
   if(pack==='sVolet' && sVolet>0){ sVolet--; updateS(); }
   if(pack==='mVolet1' && mVolet1>0){ mVolet1--; updateM(); }
@@ -147,15 +158,12 @@ function decr(pack){
   if(pack==='lLumiere' && lLumiere>0){ lLumiere--; updateL(); }
 }
 
-// Pack S
 function updateS(){
   let prix = 229 + sVolet*89;
   document.getElementById('sVoletCount').innerText = sVolet;
   document.getElementById('prixS').innerText = prix + ' €';
 }
 
-// Pack M
-let mVolet1=0, mLumiere=0, mTablette=0;
 function updateM(){
   let prix = 399 + mVolet1*89 + mLumiere*60 + mTablette*149;
   document.getElementById('mVolet1Count').innerText = mVolet1;
@@ -164,8 +172,6 @@ function updateM(){
   document.getElementById('prixM').innerText = prix + ' €';
 }
 
-// Pack L
-let lVolet1=0, lLumiere=0;
 function updateL(){
   let prix = 749 + lVolet1*89 + lLumiere*60;
   document.getElementById('lVolet1Count').innerText = lVolet1;
